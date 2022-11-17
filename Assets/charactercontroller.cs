@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class charactercontroller : MonoBehaviour
-{   float maxSpeed = 0.00001f;
-    float roatationSpeed = 2.0f;
-    float camRotation = 1.5f;
+{  
+    float rotationSpeed = 2.0f;
+    float maxSpeed = 1.0f;
+    float rotation = 0.0f;
+    float camRotation = 0.0f;
     GameObject cam;
     // Start is called before the first frame update
     void Start()
@@ -16,9 +18,10 @@ public class charactercontroller : MonoBehaviour
     void Update()
     {
        transform.position = transform.position + (transform.forward * Input.GetAxis("Vertical") * maxSpeed);
-       roatation = roatation + Input.GetAxis("Mouse X"); * rotationSpeed;
+       rotation = rotation + Input.GetAxis("Mouse X") * rotationSpeed;
        transform.rotation = Quaternion.Euler(new Vector3(0.0f, rotation, 0.0f));
-       camRotation = camRotation + Input.GetAxis("Mouse Y") * camRotationSpeed; 
+       camRotation = camRotation + Input.GetAxis("Mouse Y");
+       cam.transform.localRotation = Quaternion.Euler(new Vector3(camRotation, 0.0f, 0.0f));
        
     }
 }
